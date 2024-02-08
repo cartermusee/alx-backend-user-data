@@ -95,6 +95,7 @@ def get_db():
 
 
 def main():
+    """main funct"""
     db = get_db()
     logger = get_logger()
     cursor = db.cursor()
