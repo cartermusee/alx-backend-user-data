@@ -4,9 +4,15 @@ from typing import List
 import re
 import logging
 from logging import StreamHandler
+import os
+from mysql.connector import connect, DatabaseError, errorcode
 
 
 PII_FIELDS = ("name", "email", "address", "phone", "ssn")
+PERSONAL_DATA_DB_HOST = os.environ.get("PERSONAL_DATA_DB_HOST", "localhost")
+PERSONAL_DATA_DB_USERNAME = os.environ.get("PERSONAL_DATA_DB_USERNAME", "root")
+PERSONAL_DATA_DB_PASSWORD = os.environ.get("PERSONAL_DATA_DB_PASSWORD", "")
+PERSONAL_DATA_DB_NAME = os.environ.get("PERSONAL_DATA_DB_NAME", "")
 
 
 def filter_datum(fields: List[str],
@@ -68,3 +74,21 @@ def get_logger() -> logging.Logger:
     logger.addHandler(stream_handler)
 
     return logger
+
+
+def get_db():
+    """a db function to cinnect with db
+    """
+    try:
+        db_config = {
+            "host": PERSONAL_DATA_DB_HOST,
+            "user": PERSONAL_DATA_DB_USERNAME,
+            "password": PERSONAL_DATA_DB_PASSWORD,
+            "database": PERSONAL_DATA_DB_NAME,
+        }
+        connection = connect(**db_config)
+        return connection
+
+    except (DatabaseError, errorcode) as e:
+        logging.error(f"Database connection error: {e}")
+        return None
