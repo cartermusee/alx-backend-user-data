@@ -85,6 +85,7 @@ class BasicAuth(Auth):
             return None
 
     def current_user(self, request=None) -> TypeVar('User'):
+        """averload current_user"""
         if request is None:
             return None
         authorization_header = request.headers.get('Authorization')
