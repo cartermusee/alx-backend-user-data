@@ -15,6 +15,7 @@ CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 auth_type = getenv('AUTH_TYPE')
 auth = None
 
+
 if auth_type == 'basic':
     from api.v1.auth.auth import Auth
     auth = Auth()
@@ -22,6 +23,7 @@ if auth_type == 'basic':
 
 @app.before_request
 def before():
+    """module for before request"""
     if auth is None:
         return
     if request.path not in ['/api/v1/status/',
