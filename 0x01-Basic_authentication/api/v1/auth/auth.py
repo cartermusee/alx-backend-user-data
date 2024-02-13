@@ -10,7 +10,7 @@ class Auth():
         """ public method for require auth method
         Keyword arguments:
         path: path
-         excluded_paths: not included
+        excluded_paths: not included
         Return: false path
         """
         if path is None:
