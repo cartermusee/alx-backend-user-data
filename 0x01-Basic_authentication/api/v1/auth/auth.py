@@ -4,8 +4,7 @@ from flask import request
 from typing import List, TypeVar
 
 
-class Auth:
-    """class for auth methods"""
+class Auth():
     def require_auth(self, path: str,
                      excluded_paths: List[str]) -> bool:
         """ public method for require auth method
@@ -14,7 +13,18 @@ class Auth:
          excluded_paths: not included
         Return: false path
         """
-        return False
+        if path is None:
+            return True
+        if excluded_paths is None or len(excluded_paths) == 0:
+            return True
+        for url in excluded_paths:
+            if url.endswith('/'):
+                if path.startswith(url):
+                    return False
+                else:
+                    if path == url.rstrip('/'):
+                        return False
+        return True
 
     def authorization_header(self, request=None) -> str:
         """ public method for request auth method
