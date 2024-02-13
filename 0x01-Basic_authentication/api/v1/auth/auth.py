@@ -50,8 +50,3 @@ class Auth():
         Return: false path
         """
         return None
-
-
-class  BasicAuth(Auth):
-    """methods for basic auth"""
-    pass
