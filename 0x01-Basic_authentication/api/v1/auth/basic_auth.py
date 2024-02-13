@@ -58,5 +58,5 @@ def extract_user_credentials(self,
     if ':' not in decoded_base64_authorization_header:
         return None, None
     else:
-        email, password = decoded_base64_authorization_header
-        return ("{}:{}".format(email, password))
+        email, password = decoded_base64_authorization_header.split(":")
+        return email, password
