@@ -5,13 +5,13 @@ from typing import List, TypeVar
 
 
 class Auth():
-    """module for claa auth"""
+    """module for class auth"""
     def require_auth(self, path: str,
                      excluded_paths: List[str]) -> bool:
         """ public method for require auth method
         Keyword arguments:
         path: path
-        excluded_paths: not included
+         excluded_paths: not included
         Return: false path
         """
         if path is None:
@@ -33,6 +33,14 @@ class Auth():
         request: request to send or post
         Return: none
         """
+        if request is None:
+            return None
+        aut = request.headers.get('Authorization')
+        if aut is None:
+            return None
+        else:
+            return aut
+
         return None
 
     def current_user(self, request=None) -> TypeVar('User'):
