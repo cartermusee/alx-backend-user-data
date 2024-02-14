@@ -10,7 +10,7 @@ from models.user import User
 
 class SessionAuth(Auth):
     """clas session auth"""
-    user_id_by_session_id = []
+    user_id_by_session_id = {}
 
     def create_session(self, user_id: str = None) -> str:
         """method that hat creates a Session ID for a user_id"""
@@ -18,5 +18,5 @@ class SessionAuth(Auth):
             return None
         else:
             session_id = str(uuid.uuid4())
-            self.user_id_by_session_id.update({session_id:user_id})
+            self.user_id_by_session_id.update({session_id: user_id})
         return session_id
