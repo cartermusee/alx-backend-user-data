@@ -2,6 +2,7 @@
 """module for auth class"""
 from flask import request
 from typing import List, TypeVar
+from os import getenv
 
 
 class Auth():
@@ -50,3 +51,10 @@ class Auth():
         Return: false path
         """
         return None
+
+    def session_cookie(self, request=None):
+        if request is None:
+            return None
+        cookies = getenv('SESSION_NAME', '_my_session_id')
+        rqc = request.cookies.get(cookies)
+        return rqc
