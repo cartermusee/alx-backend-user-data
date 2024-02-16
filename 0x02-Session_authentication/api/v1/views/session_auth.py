@@ -10,6 +10,7 @@ import os
 
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
 def login():
+    """method for login route"""
     email = request.form.get('email')
     pasword = request.form.get('password')
 
@@ -34,6 +35,7 @@ def login():
 @app_views.route('/auth_session/logout', methods=['DELETE'],
                  strict_slashes=False)
 def logout():
+    """method for logout route"""
     if not auth.destroy_session(request):
         abort(404)
     return jsonify({}), 200
