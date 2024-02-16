@@ -42,8 +42,6 @@ class Auth():
         else:
             return aut
 
-        return None
-
     def current_user(self, request=None) -> TypeVar('User'):
         """ public method for request auth method
         Keyword arguments:
