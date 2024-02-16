@@ -40,7 +40,10 @@ class SessionAuth(Auth):
             return None
 
     def destroy_session(self, request=None):
-        """method returns true after a destroy session"""
+        """method returns true after a destroy session
+        args:
+            request: request to get api
+        """
         if request is None:
             return False
         cookie_val = self.session_cookie(request)
