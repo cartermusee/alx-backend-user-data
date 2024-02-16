@@ -43,6 +43,7 @@ class SessionAuth(Auth):
         """method returns true after a destroy session
         args:
             request: request to get api
+        Return: true
         """
         if request is None:
             return False
