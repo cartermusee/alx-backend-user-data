@@ -40,6 +40,7 @@ class SessionAuth(Auth):
             return None
 
     def destroy_session(self, request=None):
+        """to destroy a session"""
         if request is None:
             return False
         cookie_val = self.session_cookie(request)
