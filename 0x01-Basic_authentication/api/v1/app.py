@@ -30,19 +30,20 @@ def before():
     """module for before request"""
     if auth is None:
         return
-    if request.path not in ['/api/v1/status/',
+    else:
+        if request.path not in ['/api/v1/status/',
                             '/api/v1/unauthorized/',
                             '/api/v1/forbidden/']:
-        pass
-    if not auth.require_auth(request.path, ['/api/v1/status/',
+            pass
+        if not auth.require_auth(request.path, ['/api/v1/status/',
                                             '/api/v1/unauthorized/',
                                             '/api/v1/forbidden/']):
-        pass
-    if auth.authorization_header(request) is None:
-        abort(401)
-    user = auth.current_user(request)
-    if user is None:
-        abort(403)
+            pass
+        if auth.authorization_header(request) is None:
+            abort(401)
+        user = auth.current_user(request)
+        if user is None:
+            abort(403)
 
 
 @app.errorhandler(404)
