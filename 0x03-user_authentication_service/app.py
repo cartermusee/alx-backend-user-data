@@ -7,11 +7,13 @@ from auth import Auth
 app = Flask(__name__)
 AUTH = Auth()
 
+
 @app.route("/")
 def json():
     """methods that return a JSON payload of the form"""
     message = {"message": "Bienvenue"}
     return jsonify(message)
+
 
 @app.route("/users", methods=['POST'])
 def users():
@@ -21,7 +23,9 @@ def users():
 
     try:
         user = AUTH.register_user(email, password)
-        return jsonify({"email": user.email, "message": "user created".format(email)})
+        return jsonify(
+            {"email": user.email,
+             "message": "user created".format(email)})
     except Exception:
         return jsonify({"message": "email already registered"})
 
