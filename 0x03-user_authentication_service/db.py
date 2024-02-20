@@ -35,7 +35,8 @@ class DB:
         arguments:
             email: email
             hashed_password: password,
-        Returns: User object"""
+        Returns: User object
+        """
         new_user = User(email=email, hashed_password=hashed_password)
         self._session.add(new_user)
         self._session.commit()
@@ -46,7 +47,7 @@ class DB:
         the first row found in the users table as filtered by the
         methods input arguments"""
         if not kwargs:
-            raise NoResultFound
+            raise InvalidRequestError
         user = self._session.query(User).filter_by(**kwargs).first()
         if not user:
             raise NoResultFound
