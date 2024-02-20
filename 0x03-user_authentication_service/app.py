@@ -3,20 +3,20 @@
 from flask import Flask, jsonify, request
 from auth import Auth
 
-
-app = Flask(__name__)
 AUTH = Auth()
 
+app = Flask(__name__)
 
-@app.route("/")
-def json():
+
+@app.route("/", methods=["GET"])
+def home() -> str:
     """methods that return a JSON payload of the form"""
     message = {"message": "Bienvenue"}
     return jsonify(message)
 
 
 @app.route('/users', methods=['POST'])
-def users():
+def users() -> str:
     """method to register user"""
     email = request.form.get('email')
     password = request.form.get('password')
