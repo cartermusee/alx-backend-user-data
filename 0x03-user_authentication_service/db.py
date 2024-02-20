@@ -43,9 +43,9 @@ class DB:
         return new_user
 
     def find_user_by(self, **kwargs):
-        """method takes in arbitrary keyword arguments and returns
-        the first row found in the users table as filtered by the
-        methods input arguments"""
+        """method for find user
+        Returns: user object
+        """
         if not kwargs:
             raise InvalidRequestError
         user = self._session.query(User).filter_by(**kwargs).first()
