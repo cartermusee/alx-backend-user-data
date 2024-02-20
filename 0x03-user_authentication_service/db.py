@@ -33,15 +33,15 @@ class DB:
     def add_user(self, email, hashed_password):
         """method, which has two required string
         arguments:
-        email: email
-        hashed_password: password, 
-        Returns: User object. """
+            email: email
+            hashed_password: password,
+        Returns: User object"""
         new_user = User(email=email, hashed_password=hashed_password)
         self._session.add(new_user)
         self._session.commit()
         return new_user
 
-    def find_user_by(self,**kwargs):
+    def find_user_by(self, **kwargs):
         """method takes in arbitrary keyword arguments and returns
         the first row found in the users table as filtered by the
         methods input arguments"""
@@ -63,4 +63,3 @@ class DB:
                 setattr(user, key, val)
             else:
                 raise ValueError
-            
