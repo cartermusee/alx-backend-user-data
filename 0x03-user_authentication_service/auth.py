@@ -6,6 +6,7 @@ import bcrypt
 from db import DB
 from user import User
 from sqlalchemy.exc import NoResultFound
+import uuid
 
 
 def _hash_password(password: str) -> str:
@@ -16,6 +17,12 @@ def _hash_password(password: str) -> str:
     salt = bcrypt.gensalt()
     pass_bytes = bcrypt.hashpw(password.encode('utf-8'), salt)
     return pass_bytes
+
+
+def _generate_uuid():
+    """generate uuid"""
+    new_uid = uuid.uuid4()
+    return str(new_uid)
 
 
 class Auth:
@@ -35,4 +42,13 @@ class Auth:
         except NoResultFound:
             passw = _hash_password(password)
             return self._db.add_user(email, passw)
-            
+
+    def valid_login(self, email: str, password: str) -> None:
+        """check pass if iss hashhed while logining"""
+        try:
+            user = self._db.find_user_by(email=email)
+            if user:
+                bcrypt.checkpw(password.encode('utf-8'), user.hashed_password)
+            return True
+        except Exception:
+            False
