@@ -31,7 +31,7 @@ class DB:
         return self.__session
 
     def add_user(self, email: str, hashed_password: str) -> User:
-        """method, which adds user
+        """method which adds user
         """
         new_user = User(email=email, hashed_password=hashed_password)
         self._session.add(new_user)
@@ -60,3 +60,5 @@ class DB:
                 setattr(user, key, val)
             else:
                 raise ValueError
+        self._session.commit()
+        return None
