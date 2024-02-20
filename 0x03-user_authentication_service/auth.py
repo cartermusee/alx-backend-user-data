@@ -8,8 +8,11 @@ from user import User
 from sqlalchemy.exc import NoResultFound
 
 
-def _hash_password(password):
-    """method to paasw hash"""
+def _hash_password(password: str) -> str:
+    """method to paasw hash
+    args:
+        password(str): password to hash
+    Returns: bytes"""
     salt = bcrypt.gensalt()
     pass_bytes = bcrypt.hashpw(password.encode('utf-8'), salt)
     return pass_bytes
