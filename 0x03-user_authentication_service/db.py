@@ -37,26 +37,3 @@ class DB:
         self._session.add(new_user)
         self._session.commit()
         return new_user
-
-    def find_user_by(self, **kwargs):
-        """method for find user
-        Returns: user object
-        """
-        if not kwargs:
-            raise InvalidRequestError
-        user = self._session.query(User).filter_by(**kwargs).first()
-        if not user:
-            raise NoResultFound
-        return user
-
-    def update_user(self, user_id, **kwargs):
-        """method that takes as
-        argument:
-        user_id: id of user
-        Returns: None"""
-        user = self.find_user_by(id=user_id)
-        for key, val in kwargs.items():
-            if hasattr(user, key):
-                setattr(user, key, val)
-            else:
-                raise ValueError
