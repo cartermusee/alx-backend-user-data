@@ -77,7 +77,7 @@ class Auth:
         else:
             return None
 
-    def destroy_session(self, user_id) -> None:
+    def destroy_session(self, user_id: int) -> None:
         """destroy session"""
         user = self._db._session.query(User)\
             .filter_by(user_id=user_id).first()
