@@ -70,11 +70,11 @@ def profile():
 def get_reset_password_token():
     """reset password"""
     email = request.form.get("email")
-    if email not in AUTH._db:
-        abort(403)
-    else:
+    try:
         reset_token = AUTH.get_reset_password_token(email)
         return jsonify({"email": email, "reset_token": reset_token})
+    except Exception:
+        abort(403)
 
 
 if __name__ == "__main__":
