@@ -83,3 +83,4 @@ class Auth:
             .filter_by(user_id=user_id).first()
         if user:
             user.session_id = None
+        return None
