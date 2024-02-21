@@ -70,7 +70,7 @@ def profile():
 def get_reset_password_token():
     """reset password"""
     email = request.form.get("email")
-    if not email:
+    if email not in AUTH._db:
         abort(403)
     else:
         reset_token = AUTH.get_reset_password_token(email)
