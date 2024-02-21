@@ -65,3 +65,14 @@ class Auth:
         else:
             user.session_id = _generate_uuid()
             return user.session_id
+
+    def get_user_from_session_id(self, session_id: str):
+        """find user by session id"""
+        if session_id is None:
+            return None
+        user = self._db._session.query(User)\
+            .filter_by(session_id=session_id).first()
+        if user:
+            return user
+        else:
+            return None
